@@ -1,3 +1,4 @@
+
 ## Fisica360 - Grupo 2
 
 Alunos:
@@ -68,9 +69,11 @@ A estrutura de pastas do projeto é organizada da seguinte forma:
 ### Clone este repositório
 
 
-bash
+```bash
 git clone https://github.com/Noghiros/Certificadora-1.git
- 
+``` 
+
+Execute o comando "mvn clean package" na pasta que se encontra o arquivo pom.xml.
 Após isso, abra a pasta Certificadora-1 utilizando o VSCode, e procure o arquivo Listas.java execute e compile através do VSCode. 
 Pronto!
 
