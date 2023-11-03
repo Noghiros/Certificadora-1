@@ -3,15 +3,16 @@
 
 Alunos:
 
-Guilherme Schmidt Lingnau
+Guilherme Schmidt Lingnau - 2210924
 
-Guilherme Augusto Silva de Melo
+Guilherme Augusto Silva de Melo - 2267306
 
-Victor Ribeiro Calado 
+Victor Ribeiro Calado - 2313553
 
-Stefano Calheiros Stringhini 
+Stefano Calheiros Stringhini - 2312123
 
-Adilson Floro da Silva Junior
+Adilson Floro da Silva Junior - 2206510
+
 ## Descrição do Projeto
 
 O projeto consiste em uma aplicação Java Desktop que atua como um questionário de exercícios de física para alunos do ensino médio, permitindo aos usuários testarem e melhorarem seus conhecimentos em física por meio da resolução de uma série de 10 exercícios. A interface principal apresenta todas as questões disponíveis, exibindo informações como título, nível de dificuldade e status de resolução. O projeto também oferece funcionalidades para ordenar as questões de acordo com o nível de dificuldade.
