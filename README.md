@@ -12,7 +12,6 @@ Victor Ribeiro Calado - 2313553
 Stefano Calheiros Stringhini - 2312123
 
 Adilson Floro da Silva Junior - 2206510
-
 ## Descrição do Projeto
 
 O projeto consiste em uma aplicação Java Desktop que atua como um questionário de exercícios de física para alunos do ensino médio, permitindo aos usuários testarem e melhorarem seus conhecimentos em física por meio da resolução de uma série de 10 exercícios. A interface principal apresenta todas as questões disponíveis, exibindo informações como título, nível de dificuldade e status de resolução. O projeto também oferece funcionalidades para ordenar as questões de acordo com o nível de dificuldade.
@@ -24,6 +23,9 @@ Listagem de Problemas: A tela principal lista os 10 exercícios disponíveis, mo
 Ordenação por Nível de Dificuldade: A aplicação permite que os usuários ordenem os exercícios com base no nível de dificuldade, tanto de forma ascendente quanto descendente.
 
 Navegação entre Menus: Ao clicar em um exercício na tela principal, a aplicação direciona o usuário para uma janela dedicada a esse exercício, permitindo que o usuário navegue de forma organizada entre os exercícios, acessando cada menu de exercício individualmente. No entanto, vale ressaltar que a disponibilidade de acesso a exercícios de nível superior está condicionada ao cumprimento das regras que irão ser citadas abaixo.
+
+Aviso ao usuário: A aplicação informa ao usuário se o problema escolhido já foi resolvido anteriormente. Se o problema já foi resolvido, a aplicação pergunta ao usuário se deseja resolver novamente.
+
 
 - Regras aplicadas no Projeto:
 
