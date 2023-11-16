@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -29,6 +30,7 @@ public class Listas extends javax.swing.JFrame {
     private int pontosGanhos = 0;
     private int pontosQuestao = 0;
     private int aleatorio = 0;
+    private HashMap<Integer, Boolean> problemasResolvidos = new HashMap<>();
 
     public void setAleatorioPrincipal(int valorAleatorio, int id) {
         int colunaAleatorio = 2;
@@ -65,7 +67,7 @@ public class Listas extends javax.swing.JFrame {
 
             pontosGanhos += pontosQuestao / Math.pow(2, aleatorio);
 
-           aleatorio = 0;
+            aleatorio = 0;
         }
 
         atualizarPontosGanhos();
@@ -227,13 +229,27 @@ public class Listas extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         jButton1.setText("Problema 1");
+
         if (converter[0] == 1) {
             jButton1.setEnabled(true);
 
-            jButton1.addActionListener(new java.awt.event.ActionListener() {
+            jButton1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+                    int numeroProblema = 1;
+
+                    
+                    if (problemasResolvidos.containsKey(numeroProblema) && problemasResolvidos.get(numeroProblema)) {
+                        int escolha = JOptionPane.showConfirmDialog(null,
+                                "Este problema já foi resolvido. Deseja resolver novamente?", "Exercício 1",
+                                JOptionPane.YES_NO_OPTION);
+                        if (escolha == JOptionPane.NO_OPTION) {
+                            return;
+                        }
+                        
+                        problemasResolvidos.put(numeroProblema, false);
+                    }
+
                     try {
                         String caminhoArquivo = "src/main/java/exercicios.json";
                         FileReader reader = new FileReader(caminhoArquivo, StandardCharsets.UTF_8);
@@ -241,13 +257,13 @@ public class Listas extends javax.swing.JFrame {
                         JsonNode exerciciosJson = objectMapper.readTree(reader);
 
                         JsonNode exercicioid1 = exerciciosJson.get(0);
+
                         if (exercicioid1 != null) {
                             String tituloExercicio1 = exercicioid1.get("pergunta").asText();
                             String respostaExercicio1 = exercicioid1.get("resposta").asText();
 
                             JFrame novaTela = new JFrame("Exercício 1");
                             novaTela.setSize(600, 400);
-                            ;
                             novaTela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             novaTela.setLocationRelativeTo(null);
                             JPanel painel = new JPanel(new GridLayout(3, 1));
@@ -291,13 +307,16 @@ public class Listas extends javax.swing.JFrame {
                                             painel.add(respostaLabel);
                                             novaTela.revalidate();
                                             novaTela.repaint();
-
-                                            listas.setAleatorioPrincipal(aleatorio, 0);
+                                            problemasResolvidos.put(numeroProblema, true);
+                                            setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                            novaTela.dispose();
                                         } else {
                                             JOptionPane.showMessageDialog(null, "Resposta incorreta. Tente novamente.");
                                             int aleatorio = 0;
                                             jButton2.setEnabled(false);
-                                            listas.setAleatorioPrincipal(aleatorio, 0);
+                                            problemasResolvidos.put(numeroProblema, true);
+                                            setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                            novaTela.dispose();
                                         }
 
                                         respostaTextField.setText("");
@@ -317,6 +336,7 @@ public class Listas extends javax.swing.JFrame {
         } else {
             jButton1.setEnabled(false);
         }
+
         jButton2.setText("Problema 2");
 
         boolean exercicio1Nivel1RespondidoEAcertado = exercicio1Nivel1RespondidoEAcertado();
@@ -324,6 +344,16 @@ public class Listas extends javax.swing.JFrame {
 
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                int numeroProblema = 2;
+
+                if (problemasResolvidos.containsKey(numeroProblema) && problemasResolvidos.get(numeroProblema)) {
+                    int escolha = JOptionPane.showConfirmDialog(null,
+                            "Este problema já foi resolvido. Deseja resolver novamente?", "Exercício 2",
+                            JOptionPane.YES_NO_OPTION);
+                    if (escolha == JOptionPane.NO_OPTION) {
+                        return;
+                    }
+                }
                 try {
                     String caminhoArquivo = "src/main/java/exercicios.json";
                     FileReader reader = new FileReader(caminhoArquivo, StandardCharsets.UTF_8);
@@ -376,14 +406,16 @@ public class Listas extends javax.swing.JFrame {
                                         painel.add(respostaLabel);
                                         novaTela.revalidate();
                                         novaTela.repaint();
-
-                                        listas.setAleatorioPrincipal(aleatorio, 1);
+                                        problemasResolvidos.put(numeroProblema, true);
+                                        setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                        novaTela.dispose();
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Resposta incorreta. Tente novamente.");
                                         int aleatorio = 0;
                                         jButton3.setEnabled(false);
-
-                                        listas.setAleatorioPrincipal(aleatorio, 1);
+                                        problemasResolvidos.put(numeroProblema, true);
+                                        setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                        novaTela.dispose();
                                     }
 
                                     respostaTextField.setText("");
@@ -412,6 +444,16 @@ public class Listas extends javax.swing.JFrame {
 
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                int numeroProblema = 3;
+
+                if (problemasResolvidos.containsKey(numeroProblema) && problemasResolvidos.get(numeroProblema)) {
+                    int escolha = JOptionPane.showConfirmDialog(null,
+                            "Este problema já foi resolvido. Deseja resolver novamente?", "Exercício 3",
+                            JOptionPane.YES_NO_OPTION);
+                    if (escolha == JOptionPane.NO_OPTION) {
+                        return;
+                    }
+                }
                 try {
                     String caminhoArquivo = "src/main/java/exercicios.json";
                     FileReader reader = new FileReader(caminhoArquivo, StandardCharsets.UTF_8);
@@ -458,12 +500,15 @@ public class Listas extends javax.swing.JFrame {
                                     painel.add(respostaLabel);
                                     novaTela.revalidate();
                                     novaTela.repaint();
-
-                                    listas.setAleatorioPrincipal(aleatorio, 2);
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Resposta incorreta. Tente novamente.");
                                     int aleatorio = 0;
-                                    listas.setAleatorioPrincipal(aleatorio, 2);
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
                                 }
                                 respostaTextField.setText("");
                             }
@@ -483,6 +528,16 @@ public class Listas extends javax.swing.JFrame {
 
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                int numeroProblema = 4;
+
+                if (problemasResolvidos.containsKey(numeroProblema) && problemasResolvidos.get(numeroProblema)) {
+                    int escolha = JOptionPane.showConfirmDialog(null,
+                            "Este problema já foi resolvido. Deseja resolver novamente?", "Exercício 4",
+                            JOptionPane.YES_NO_OPTION);
+                    if (escolha == JOptionPane.NO_OPTION) {
+                        return;
+                    }
+                }
                 try {
                     String caminhoArquivo = "src/main/java/exercicios.json";
                     FileReader reader = new FileReader(caminhoArquivo, StandardCharsets.UTF_8);
@@ -525,7 +580,7 @@ public class Listas extends javax.swing.JFrame {
                                     JOptionPane.showMessageDialog(null, "Resposta correta!");
                                     int aleatorio = 1;
                                     jButton3.setEnabled(true);
-                                    listas.setAleatorioPrincipal(aleatorio, 3);
+
                                     jButton4.setEnabled(true);
                                     jButton6.setEnabled(true);
                                     jButton8.setEnabled(true);
@@ -535,12 +590,17 @@ public class Listas extends javax.swing.JFrame {
                                     painel.add(respostaLabel);
                                     novaTela.revalidate();
                                     novaTela.repaint();
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
 
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Resposta incorreta. Tente novamente.");
                                     int aleatorio = 0;
                                     jButton3.setEnabled(false);
-                                    listas.setAleatorioPrincipal(aleatorio, 3);
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
                                 }
 
                                 respostaTextField.setText("");
@@ -560,6 +620,16 @@ public class Listas extends javax.swing.JFrame {
         if (converter[4] == 1) {
             jButton5.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+                    int numeroProblema = 5;
+
+                    if (problemasResolvidos.containsKey(numeroProblema) && problemasResolvidos.get(numeroProblema)) {
+                        int escolha = JOptionPane.showConfirmDialog(null,
+                                "Este problema já foi resolvido. Deseja resolver novamente?", "Exercício 5",
+                                JOptionPane.YES_NO_OPTION);
+                        if (escolha == JOptionPane.NO_OPTION) {
+                            return;
+                        }
+                    }
                     try {
                         String caminhoArquivo = "src/main/java/exercicios.json";
                         FileReader reader = new FileReader(caminhoArquivo, StandardCharsets.UTF_8);
@@ -612,11 +682,15 @@ public class Listas extends javax.swing.JFrame {
                                         novaTela.revalidate();
                                         novaTela.repaint();
 
-                                        listas.setAleatorioPrincipal(aleatorio, 4);
+                                        problemasResolvidos.put(numeroProblema, true);
+                                        setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                        novaTela.dispose();
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Resposta incorreta. Tente novamente.");
                                         int aleatorio = 0;
-                                        listas.setAleatorioPrincipal(aleatorio, 4);
+                                        problemasResolvidos.put(numeroProblema, true);
+                                        setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                        novaTela.dispose();
                                     }
 
                                     respostaTextField.setText("");
@@ -646,6 +720,16 @@ public class Listas extends javax.swing.JFrame {
 
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                int numeroProblema = 6;
+
+                if (problemasResolvidos.containsKey(numeroProblema) && problemasResolvidos.get(numeroProblema)) {
+                    int escolha = JOptionPane.showConfirmDialog(null,
+                            "Este problema já foi resolvido. Deseja resolver novamente?", "Exercício 6",
+                            JOptionPane.YES_NO_OPTION);
+                    if (escolha == JOptionPane.NO_OPTION) {
+                        return;
+                    }
+                }
                 try {
                     String caminhoArquivo = "src/main/java/exercicios.json";
                     FileReader reader = new FileReader(caminhoArquivo, StandardCharsets.UTF_8);
@@ -697,12 +781,16 @@ public class Listas extends javax.swing.JFrame {
                                     novaTela.revalidate();
                                     novaTela.repaint();
 
-                                    listas.setAleatorioPrincipal(aleatorio, 5);
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Resposta incorreta. Tente novamente.");
                                     int aleatorio = 0;
 
-                                    listas.setAleatorioPrincipal(aleatorio, 5);
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
                                 }
 
                                 respostaTextField.setText("");
@@ -729,6 +817,16 @@ public class Listas extends javax.swing.JFrame {
 
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                int numeroProblema = 7;
+
+                if (problemasResolvidos.containsKey(numeroProblema) && problemasResolvidos.get(numeroProblema)) {
+                    int escolha = JOptionPane.showConfirmDialog(null,
+                            "Este problema já foi resolvido. Deseja resolver novamente?", "Exercício 7",
+                            JOptionPane.YES_NO_OPTION);
+                    if (escolha == JOptionPane.NO_OPTION) {
+                        return;
+                    }
+                }
                 try {
                     String caminhoArquivo = "src/main/java/exercicios.json";
                     FileReader reader = new FileReader(caminhoArquivo, StandardCharsets.UTF_8);
@@ -778,11 +876,15 @@ public class Listas extends javax.swing.JFrame {
                                     novaTela.revalidate();
                                     novaTela.repaint();
 
-                                    listas.setAleatorioPrincipal(aleatorio, 6);
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Resposta incorreta. Tente novamente.");
                                     int aleatorio = 0;
-                                    listas.setAleatorioPrincipal(aleatorio, 6);
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
                                 }
                                 respostaTextField.setText("");
                             }
@@ -809,6 +911,16 @@ public class Listas extends javax.swing.JFrame {
 
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                int numeroProblema = 8;
+
+                if (problemasResolvidos.containsKey(numeroProblema) && problemasResolvidos.get(numeroProblema)) {
+                    int escolha = JOptionPane.showConfirmDialog(null,
+                            "Este problema já foi resolvido. Deseja resolver novamente?", "Exercício 8",
+                            JOptionPane.YES_NO_OPTION);
+                    if (escolha == JOptionPane.NO_OPTION) {
+                        return;
+                    }
+                }
                 try {
                     String caminhoArquivo = "src/main/java/exercicios.json";
                     FileReader reader = new FileReader(caminhoArquivo, StandardCharsets.UTF_8);
@@ -859,11 +971,15 @@ public class Listas extends javax.swing.JFrame {
                                     novaTela.revalidate();
                                     novaTela.repaint();
 
-                                    listas.setAleatorioPrincipal(aleatorio, 7);
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Resposta incorreta. Tente novamente.");
                                     int aleatorio = 0;
-                                    listas.setAleatorioPrincipal(aleatorio, 7);
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
                                 }
 
                                 respostaTextField.setText("");
@@ -883,6 +999,16 @@ public class Listas extends javax.swing.JFrame {
         if (converter[8] == 1) {
             jButton9.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+                    int numeroProblema = 9;
+
+                    if (problemasResolvidos.containsKey(numeroProblema) && problemasResolvidos.get(numeroProblema)) {
+                        int escolha = JOptionPane.showConfirmDialog(null,
+                                "Este problema já foi resolvido. Deseja resolver novamente?", "Exercício 9",
+                                JOptionPane.YES_NO_OPTION);
+                        if (escolha == JOptionPane.NO_OPTION) {
+                            return;
+                        }
+                    }
                     try {
                         String caminhoArquivo = "src/main/java/exercicios.json";
                         FileReader reader = new FileReader(caminhoArquivo, StandardCharsets.UTF_8);
@@ -935,11 +1061,15 @@ public class Listas extends javax.swing.JFrame {
                                         novaTela.revalidate();
                                         novaTela.repaint();
 
-                                        listas.setAleatorioPrincipal(aleatorio, 8);
+                                        problemasResolvidos.put(numeroProblema, true);
+                                        setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                        novaTela.dispose();
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Resposta incorreta. Tente novamente.");
                                         int aleatorio = 0;
-                                        listas.setAleatorioPrincipal(aleatorio, 8);
+                                        problemasResolvidos.put(numeroProblema, true);
+                                        setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                        novaTela.dispose();
                                     }
 
                                     respostaTextField.setText("");
@@ -968,6 +1098,16 @@ public class Listas extends javax.swing.JFrame {
 
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                int numeroProblema = 10;
+
+                if (problemasResolvidos.containsKey(numeroProblema) && problemasResolvidos.get(numeroProblema)) {
+                    int escolha = JOptionPane.showConfirmDialog(null,
+                            "Este problema já foi resolvido. Deseja resolver novamente?", "Exercício 10",
+                            JOptionPane.YES_NO_OPTION);
+                    if (escolha == JOptionPane.NO_OPTION) {
+                        return;
+                    }
+                }
                 try {
                     String caminhoArquivo = "src/main/java/exercicios.json";
                     FileReader reader = new FileReader(caminhoArquivo, StandardCharsets.UTF_8);
@@ -1017,13 +1157,17 @@ public class Listas extends javax.swing.JFrame {
                                     novaTela.revalidate();
                                     novaTela.repaint();
 
-                                    listas.setAleatorioPrincipal(aleatorio, 9);
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Resposta incorreta. Tente novamente.");
                                     int aleatorio = 0;
                                     jButton3.setEnabled(false);
 
-                                    listas.setAleatorioPrincipal(aleatorio, 9);
+                                    problemasResolvidos.put(numeroProblema, true);
+                                    setAleatorioPrincipal(aleatorio, numeroProblema - 1);
+                                    novaTela.dispose();
                                 }
 
                                 respostaTextField.setText("");
