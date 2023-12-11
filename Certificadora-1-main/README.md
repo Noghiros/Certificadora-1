@@ -26,6 +26,8 @@ Navegação entre Menus: Ao clicar em um exercício na tela principal, a aplica�
 
 Aviso ao usuário: A aplicação informa ao usuário se o problema escolhido já foi resolvido anteriormente. Se o problema já foi resolvido, a aplicação pergunta ao usuário se deseja resolver novamente.
 
+Pontuação: A aplicação fornece informações sobre a pontuação do usuário. A pontuação é acumulada à medida que o usuário resolve e acerta os exercicios, com valores distintos para cada nível: 100 pontos para nível 1, 250 pontos para nível 2 e 500 pontos para nível 3. E segue a regra de que caso um exercício que já foi resolvido e que o usuario errou e é refeito, a pontuação do exercicio é reduzida pela metade a cada tentativa.
+
 
 - Regras aplicadas no Projeto:
 
@@ -83,4 +85,4 @@ Pronto!
 ### Dependências
 
 
-Jackson Databind (Versão 2.15.2): Usada para manipular JSON.
+Jackson Databind (Versão 2.16.0): Usada para manipular JSON.
