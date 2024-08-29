@@ -7,7 +7,7 @@ Guilherme Schmidt Lingnau - 2210924
 
 Guilherme Augusto Silva de Melo - 2267306
 
-Victor Ribeiro Calado - 2313553
+Victor Ribeiro Calado - 2313553 
 
 Stefano Calheiros Stringhini - 2312123
 
